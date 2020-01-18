@@ -7,6 +7,7 @@ jobs:
     steps:
       - checkout
       - sonarcloud/scan
+          cache_version: 2
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
 
