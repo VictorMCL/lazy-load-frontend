@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build:
+  Build:
     docker:
       - image: circleci/node:12.14
     working_directory: ~/repo
@@ -22,7 +22,18 @@ jobs:
           paths:
             - .  
 
-  static code analysis:
+  Unit Test:
+    docker:
+      - image: circleci/node:12.14
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: .
+      - run: 
+          name: Unit Test
+          command: echo "Testing"
+
+  Static Code Analysis:
     docker:
       - image: circleci/node:12.14
     working_directory: ~/repo
@@ -38,9 +49,14 @@ orbs:
 workflows:
   main:
     jobs:
-      - build:
+      - Build:
           context: sonarcloud
-      - static code analysis:
+      - Unit Test:
+          context: sonarcloud
           requires:
-            - build
+            - Build
+      - Static Code Analysis:
           context: sonarcloud
+          requires:
+            - Build
+            - Unit Test
