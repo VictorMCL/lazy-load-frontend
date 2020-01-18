@@ -10,8 +10,9 @@ jobs:
           cache-version: v0
           github-project-slug: socialtables/lazy-load-frontend
           project-key: VictorMCL_lazy-load-frontend
+          scm-branch-name: $CIRCLE_BRANCH
 orbs:
-  sonarcloud: socialtables/sonarcloud@1.0.0
+  sonarcloud: socialtables/sonarcloud@1.1.0
 
 workflows:
   main:
