@@ -11,7 +11,7 @@ jobs:
           github-project-slug: socialtables/my-project
           project-key: socialtables_my-project
 orbs:
-  sonarcloud: socialtables/sonarcloud@x.y.z
+  sonarcloud: socialtables/sonarcloud@1.1.0
 version: 2.1
 workflows:
   build-deploy:
