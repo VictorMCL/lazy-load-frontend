@@ -84,3 +84,6 @@ workflows:
           context: sonarcloud
           requires:
             - Static Code Analysis
+          filters:
+            branches:
+              only: master
