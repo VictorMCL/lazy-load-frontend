@@ -1,29 +1,24 @@
-version: 2.1
-
 jobs:
   build:
     docker:
-      - image: circleci/node:12.14
-    working_directory: ~/repo
+      - image: 'circleci/node:10.16.3'
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-      - run: 
-          name: install dependencies
-          command: npm install
-      - run: 
-          name: build
-          command: npm run build
-      - sonarcloud/scan
-
+      - run: npm install
+      - run: npm test
+      - sonarcloud/scan-on-branch-commit:
+          cache-version: v0
+          github-project-slug: socialtables/my-project
+          project-key: socialtables_my-project
 orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.0
-
+  sonarcloud: socialtables/sonarcloud@x.y.z
+version: 2.1
 workflows:
-  main:
+  build-deploy:
     jobs:
       - build:
-          context: sonarcloud
+          context: st-global
+          filters:
+            tags:
+              only: /.*/
+  version: 2
