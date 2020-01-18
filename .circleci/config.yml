@@ -18,7 +18,7 @@ jobs:
           name: build
           command: npm run build
       - persist_to_workspace:
-          root: workspace
+          root: /root/project
           paths:
             - echo-output
 
@@ -27,7 +27,7 @@ jobs:
       - image: circleci/node:12.14
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /root/project
       - run: ls
       - sonarcloud/scan
 
