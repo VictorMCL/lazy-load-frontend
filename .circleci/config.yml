@@ -7,7 +7,6 @@ jobs:
     steps:
       - checkout
       - sonarcloud/scan
-
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
 
