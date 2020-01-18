@@ -33,4 +33,6 @@ workflows:
       - build:
           context: sonarcloud
       - static code analysis:
+          requires:
+            - build
           context: sonarcloud
