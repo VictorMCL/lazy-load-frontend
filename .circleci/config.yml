@@ -18,3 +18,6 @@ workflows:
     jobs:
       - build:
           context: st-global
+          filters:
+            tags:
+              only: /.*/
