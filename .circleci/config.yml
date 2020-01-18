@@ -28,7 +28,10 @@ orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
 
 workflows:
-  main:
+  CI/DC:
     jobs:
+      - build:
       - static code analysis:
+          requires: 
+            - build
           context: sonarcloud
