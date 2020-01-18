@@ -18,14 +18,12 @@ jobs:
           name: build
           command: npm run build
       - sonarcloud/scan
-          github-project-slug: victormcl
-          project-key: VictorMCL_lazy-load-frontend
 
 orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.0 
+  sonarcloud: sonarsource/sonarcloud@1.0.1
 
 workflows:
   main:
     jobs:
       - build:
-          context: sonarcloud
+          context: SonarCloud
