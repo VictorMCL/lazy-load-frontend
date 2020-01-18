@@ -6,12 +6,15 @@ jobs:
       - image: circleci/node:12.14
     steps:
       - checkout
-      - sonarcloud/scan
+      - sonarcloud/scan-on-branch-commit:
+          cache-version: v0
+          github-project-slug: socialtables/lazy-load-frontend
+          project-key: VictorMCL_lazy-load-frontend
 orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.1
+  sonarcloud: socialtables/sonarcloud@1.1.0
 
 workflows:
   main:
     jobs:
       - build:
-          context: sonarcloud
+          context: st-global
