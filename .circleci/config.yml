@@ -11,7 +11,7 @@ jobs:
           github-project-slug: socialtables/lazy-load-frontend
           project-key: VictorMCL_lazy-load-frontend
 orbs:
-  sonarcloud: socialtables/sonarcloud@1.1.0
+  sonarcloud: socialtables/sonarcloud@1.0.0
 
 workflows:
   main:
