@@ -28,7 +28,7 @@ orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
 
 workflows:
-  CI/DC:
+  main:
     jobs:
       - build:
       - static code analysis:
