@@ -95,7 +95,7 @@ jobs:
     environment:
       GOOGLE_PROJECT_ID: "kubernetes-248918"
       GOOGLE_COMPUTE_ZONE: "us-central1-c"
-      BUCKET_NAME: "python-test-tfstate-v"
+      BUCKET_NAME: "lazy-load-frontend-tfstate"
       NODE_VERSION: "1.13.11-gke.14"
       MACHINE_TYPE: "n1-standard-1"
       NODE_COUNT: "1"
@@ -118,7 +118,7 @@ jobs:
           command: |
             ls -la
             cd terraform/
-            terraform init -backend-config='credentials=${GCLOUD_SERVICE_KEY}' -backend-config='bucket=${BUCKET_NAME}' -backend-config='prefix=Tfstate-${STAGE}'          
+            terraform init -backend-config='credentials=$GCLOUD_SERVICE_KEY' -backend-config='bucket=$BUCKET_NAME' -backend-config='prefix=Tfstate-$STAGE'          
             
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
