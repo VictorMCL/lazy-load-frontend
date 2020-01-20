@@ -166,7 +166,7 @@ jobs:
           name: Replace Variable .yaml
           command: |
             cd kubernetes/
-            sed -i 's/#{APP_NAME}/$APP_NAME/g; s/#{DEPLOYMENT}/$STAGE/g' 00-app-ns.yaml
+            sed -i 's/#{APP_NAME}/${APP_NAME}/g; s/#{DEPLOYMENT}/${STAGE}/g' 00-app-ns.yaml
             cat 00-app-ns.yaml
 
 workflows:
