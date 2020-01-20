@@ -68,7 +68,7 @@ jobs:
     docker:
       - image: circleci/buildpack-deps:stretch
     environment:
-      GIT_URL_PROYECT: git@github.com:VictorMCL/python-flask.git
+      GIT_URL_PROYECT: git@github.com:VictorMCL/lazy-load-frontend_CD.git
     working_directory: ~/CD
     steps:
       - add_ssh_keys:
