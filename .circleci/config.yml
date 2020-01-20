@@ -167,7 +167,6 @@ jobs:
           command: |
             cd kubernetes/
             sed -i 's/#{APP_NAME}/'"${APP_NAME}"'/g; s/#{DEPLOYMENT}/'"${STAGE}"'/g; s/#{VERSION}/20/g' 00-app-ns.yaml 02-app-svc.yaml
-          #  sed -i 's/#{APP_NAME}/'"${APP_NAME}"'/g; s/#{DEPLOYMENT}/'"${STAGE}"'/g; s/#{VERSION}/20/g' 02-app-svc.yaml
             cat 00-app-ns.yaml
             cat 02-app-svc.yaml
 
