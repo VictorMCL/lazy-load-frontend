@@ -91,7 +91,7 @@ jobs:
 
   Create Cluster K8s:
     docker:
-      - image: google/cloud-sdk
+      - image: victormcl/terraform-gcp-k8s:latest
     environment:
       GOOGLE_PROJECT_ID: "kubernetes-248918"
       GOOGLE_COMPUTE_ZONE: "us-central1-c"
