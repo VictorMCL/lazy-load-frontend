@@ -64,26 +64,39 @@ jobs:
           name: Push Docker image
           command: docker push victormcl/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BUILD_NUM
 
+  Cloning repositoriy CD:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    working_directory: ~/CD
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "51:8f:f2:27:7d:6c:b6:37:fe:7a:53:d5:ef:e0:5a:89"
+      - run:
+          name: Clone frontend repository
+          command: git clone git@github.com:VictorMCL/python-flask.git
+
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
 
 workflows:
   main:
     jobs:
-      - Build:
-          context: sonarcloud
-      - Unit Test:
-          context: sonarcloud
-          requires:
-            - Build
-      - Static Code Analysis:
-          context: sonarcloud
-          requires:
-            - Unit Test
-      - Build and Upload Docker:
-          context: sonarcloud
-          requires:
-            - Static Code Analysis
-          filters:
-            branches:
-              only: master
+      #- Build:
+      #    context: sonarcloud
+      #- Unit Test:
+      #    context: sonarcloud
+      #    requires:
+      #      - Build
+      #- Static Code Analysis:
+      #    context: sonarcloud
+      #    requires:
+      #      - Unit Test
+      #- Build and Upload Docker:
+      #    context: sonarcloud
+      #    requires:
+      #      - Static Code Analysis
+      #    filters:
+      #      branches:
+      #        only: master
+      - Cloning repositoriy CD
