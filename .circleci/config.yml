@@ -89,7 +89,6 @@ jobs:
           paths:
             - .  
 
-  
   Create Cluster K8s:
     docker:
       - image: google/cloud-sdk
@@ -100,18 +99,24 @@ jobs:
       NODE_VERSION: "1.13.11-gke.14"
       MACHINE_TYPE: "n1-standard-1"
       NODE_COUNT: "1"
+      STAGE: "integration"
     working_directory: ~/CD
     steps:
       - attach_workspace:
           at: .
-      - run: ls -la  
+      - run:
+          name: Clear .terraform
+          command: rm -rf .terraform
       - run:
           name: Set Service Account
           command: |
             echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-
+      - run:
+          name: Terraform init
+          command: terraform init -backend-config='credentials=${GCLOUD_SERVICE_KEY}' -backend-config='bucket=${BUCKET_NAME}' -backend-config='prefix=Tfstate-${STAGE}'          
+            
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
 
