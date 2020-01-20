@@ -134,6 +134,11 @@ jobs:
             -var "machine_type=${MACHINE_TYPE}" \
             -var "initial_node_count=${NODE_COUNT}" \
             -out ${CIRCLE_PROJECT_REPONAME}-cl-${STAGE}
+      - run:
+          name: Terraform apply
+          command: | 
+            cd terraform/ 
+            terraform apply -lock=false ${CIRCLE_PROJECT_REPONAME}-cl-${STAGE}
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
