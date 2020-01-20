@@ -149,7 +149,7 @@ jobs:
       STAGE: "integration"
       APP_NAME: "lazy-load"
       DOCKER_HOST: "victormcl"
-      VERSION: "93"
+      VERSION: "97"
     working_directory: ~/CD
     steps:
       - attach_workspace:
