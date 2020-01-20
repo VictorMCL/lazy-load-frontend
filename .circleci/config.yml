@@ -67,6 +67,8 @@ jobs:
   Cloning repositoriy CD:
     docker:
       - image: circleci/buildpack-deps:stretch
+    environment:
+      GIT_URL_PROYECT: git@github.com:VictorMCL/python-flask.git
     working_directory: ~/CD
     steps:
       - add_ssh_keys:
@@ -81,8 +83,7 @@ jobs:
             ' >> ~/.ssh/known_hosts
       - run:
           name: Clone frontend repository
-          command: git clone git@github.com:VictorMCL/python-flask.git ~/CD
-      - run: ls
+          command: git clone ${GIT_URL_PROYECT} ~/CD
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
