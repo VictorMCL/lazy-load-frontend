@@ -120,6 +120,7 @@ jobs:
       - run:
           name: Terraform init
           command: |
+            ls -la
             terraform init -backend-config="credentials=${GCLOUD_SERVICE_KEY}" -backend-config="bucket=${BUCKET_NAME}" -backend-config="prefix=Tfstate-${STAGE}"
       - run:
           name: Terraform plan
