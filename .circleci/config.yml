@@ -81,7 +81,7 @@ jobs:
             ' >> ~/.ssh/known_hosts
       - run:
           name: Clone frontend repository
-          command: git clone git@github.com:VictorMCL/python-flask.git
+          command: git clone git@github.com:VictorMCL/python-flask.git ~/CD
       - run: ls
 
 orbs:
