@@ -107,10 +107,8 @@ jobs:
       - run:
           name: Clear .terraform
           command: |
-            ls -la
             cd terraform/  
             rm -rf .terraform
-            ls -la
       - run:
           name: Set Service Account
           command: |
@@ -120,11 +118,12 @@ jobs:
       - run:
           name: Terraform init
           command: |
-            ls -la
+            cd terraform/ 
             terraform init -backend-config="credentials=${GCLOUD_SERVICE_KEY}" -backend-config="bucket=${BUCKET_NAME}" -backend-config="prefix=Tfstate-${STAGE}"
       - run:
           name: Terraform plan
           command: | 
+            cd terraform/ 
             terraform plan -lock=false \
             -var "credentials=${GCLOUD_SERVICE_KEY}" \
             -var "stage=${STAGE}" \
