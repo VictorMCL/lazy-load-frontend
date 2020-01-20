@@ -165,7 +165,9 @@ jobs:
       - run:
           name: prueba
           command: |
+            cd kubernetes/
             kubectl get node
+            kubectl apply -f 00-app-ns.yaml
 
 workflows:
   main:
