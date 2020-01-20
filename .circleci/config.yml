@@ -74,7 +74,7 @@ jobs:
             - "40:e1:81:a2:fc:ea:0c:98:c0:a3:8e:74:f0:ed:38:0a"
       - run:
           name: Clone frontend repository
-          command: git clone git@github.com:VictorMCL/python-flask.git
+          command: git clone git@github.com:VictorMCL/python-flask.git --non-interactive
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
