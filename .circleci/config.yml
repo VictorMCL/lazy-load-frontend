@@ -115,7 +115,10 @@ jobs:
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
       - run:
           name: Terraform init
-          command: terraform init -backend-config='credentials=${GCLOUD_SERVICE_KEY}' -backend-config='bucket=${BUCKET_NAME}' -backend-config='prefix=Tfstate-${STAGE}'          
+          command: |
+            ls -la
+            cd terraform/
+            terraform init -backend-config='credentials=${GCLOUD_SERVICE_KEY}' -backend-config='bucket=${BUCKET_NAME}' -backend-config='prefix=Tfstate-${STAGE}'          
             
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
