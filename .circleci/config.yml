@@ -103,12 +103,7 @@ jobs:
     working_directory: ~/CD
     steps:
       - attach_workspace:
-          at: .
-      - run:
-          name: Clear .terraform
-          command: |
-            cd terraform/  
-            rm -rf .terraform
+          at: .    
       - run:
           name: Set Service Account
           command: |
@@ -119,6 +114,7 @@ jobs:
           name: Terraform init
           command: |
             cd terraform/ 
+            rm -rf .terraform
             terraform init -backend-config="credentials=${GCLOUD_SERVICE_KEY}" -backend-config="bucket=${BUCKET_NAME}" -backend-config="prefix=Tfstate-${STAGE}"
       - run:
           name: Terraform plan
