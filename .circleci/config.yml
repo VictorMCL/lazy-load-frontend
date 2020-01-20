@@ -118,7 +118,7 @@ jobs:
           command: |
             ls -la
             cd terraform/
-            terraform init -backend-config="credentials=${GCLOUD_SERVICE_KEY}" -backend-config='bucket=$BUCKET_NAME' -backend-config='prefix=Tfstate-$STAGE'          
+            terraform init -backend-config="credentials=${GCLOUD_SERVICE_KEY}" -backend-config="bucket=${BUCKET_NAME}" -backend-config="prefix=Tfstate-${STAGE}"          
             
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
