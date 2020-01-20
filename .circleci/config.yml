@@ -84,6 +84,27 @@ jobs:
       - run:
           name: Clone frontend repository
           command: git clone ${GIT_URL_PROYECT} ~/CD
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .  
+
+  
+  Create Cluster K8s:
+    docker:
+      - image: google/cloud-sdk
+    environment:
+      GCLOUD_PROJECT_NAME: "kubernetes-248918"
+      GCLOUD_ZONE: "us-central1-c"
+      BUCKET_NAME: "python-test-tfstate-v"
+      NODE_VERSION: "1.13.11-gke.14"
+      MACHINE_TYPE: "n1-standard-1"
+      NODE_COUNT: "1"
+    working_directory: ~/CD
+    steps:
+      - attach_workspace:
+          at: .
+      - run: ls -la  
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
@@ -108,4 +129,9 @@ workflows:
       #    filters:
       #      branches:
       #        only: master
-      - Cloning repositoriy CD
+      - Cloning repositoriy CD:
+          context: sonarcloud
+      - Create Cluster K8s:
+          context: sonarcloud
+          requires:
+            - Cloning repositoriy CD
