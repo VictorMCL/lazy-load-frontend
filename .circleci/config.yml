@@ -176,6 +176,7 @@ jobs:
       - run:
           name: Deploy k8
           command: |
+            cd kubernetes/
             kubectl apply -f .
       
 workflows:
