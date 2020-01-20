@@ -94,8 +94,8 @@ jobs:
     docker:
       - image: google/cloud-sdk
     environment:
-      GCLOUD_PROJECT_NAME: "kubernetes-248918"
-      GCLOUD_ZONE: "us-central1-c"
+      GOOGLE_PROJECT_ID: "kubernetes-248918"
+      GOOGLE_COMPUTE_ZONE: "us-central1-c"
       BUCKET_NAME: "python-test-tfstate-v"
       NODE_VERSION: "1.13.11-gke.14"
       MACHINE_TYPE: "n1-standard-1"
@@ -105,6 +105,12 @@ jobs:
       - attach_workspace:
           at: .
       - run: ls -la  
+      - run:
+          name: Set Service Account
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
