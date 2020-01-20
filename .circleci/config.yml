@@ -39,7 +39,7 @@ jobs:
           command: |
             ls
             echo "Testing"
-            echo $$CIRCLE_WORKFLOW_NUM
+            echo $CIRCLE_WORKFLOW_NUM
 
   Static Code Analysis:
     docker:
