@@ -182,32 +182,41 @@ jobs:
 workflows:
   main:
     jobs:
-      #- Build:
-      #    context: sonarcloud
-      #- Unit Test:
-      #    context: sonarcloud
-      #    requires:
-      #      - Build
-      #- Static Code Analysis:
-      #    context: sonarcloud
-      #    requires:
-      #      - Unit Test
-      #- Build and Upload Docker:
-      #    context: sonarcloud
-      #    requires:
-      #      - Static Code Analysis
-      #    filters:
-      #      branches:
-      #        only: master
+      - Build:
+          context: sonarcloud
+      - Unit Test:
+          context: sonarcloud
+          requires:
+            - Build
+      - Static Code Analysis:
+          context: sonarcloud
+          requires:
+            - Unit Test
+      - Build and Upload Docker:
+          context: sonarcloud
+          requires:
+            - Static Code Analysis
+          filters:
+            branches:
+              only: master
       - Cloning repositoriy CD:
           context: sonarcloud
-      #    requires:
-      #      - Build and Upload Docker
+          requires:
+            - Build and Upload Docker
+          filters:
+            branches:
+              only: master
       - Create Cluster K8s:
           context: sonarcloud
           requires:
             - Cloning repositoriy CD
+          filters:
+            branches:
+              only: master
       - Deploy App:
           context: sonarcloud
           requires:
             - Create Cluster K8s
+          filters:
+            branches:
+              only: master
