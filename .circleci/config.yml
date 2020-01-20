@@ -163,11 +163,11 @@ jobs:
           command: |
             gcloud container clusters get-credentials ${APP_NAME}-cl-${STAGE} --zone ${GOOGLE_COMPUTE_ZONE} --project ${GOOGLE_PROJECT_ID}
       - run:
-          name: prueba
+          name: Replace Variable .yaml
           command: |
             cd kubernetes/
-            kubectl get node
-            kubectl apply -f 00-app-ns.yaml
+            sed -i 's/#{APP_NAME}/$APP_NAME/g; s/#{DEPLOYMENT}/$STAGE/g' 00-app-ns.yaml
+            cat 00-app-ns.yaml
 
 workflows:
   main:
